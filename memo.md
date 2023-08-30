@@ -278,9 +278,75 @@ creamy.greet4(); // 4) Hi, I'm Mami
 creamy.greet5(); // 5) Hi, I'm Mami
 ```
 
-```
+```javascript
 「タグの中に type="module" という属性の指定があるでしょ。これが <script> タグの中のコードをモジ
 ュールとして定義するためのものなの。これがないとコードがすべてグローバルスコープに展開される従
 来のスクリプト形式で定義されてしまうため、import 文が使えない」
+```
+
+```javascript
+export * from './constants.js';
+export { plus as add, default as multiply } from './math.js';
+export * as German from './constants2.js';
+「インポート元が複数ファイル、複数ディレクトリ階層に渡るような場合、インポート文をいちいち分け
+119 モジュール A がモジュール B に依存し、モジュール B もモジュール A に依存しているような場合のこと。こ
+れを避けるためにモジュールを集約する方法については記事「How to fix nasty circular dependency issues once
+and for all in JavaScript & TypeScript」にくわしい。
+https://medium.com/visual-development/how-to-fix-nasty-circular-dependency-issues-once-and-for-all-in-javascript-typ
+escript-a04c987cf0de
+111
+2-9. モジュールを読み込む
+て書くのが面倒だよね。そういうときはエクスポートをひとつのファイルに集約できるの。ここではまず
+modules/ ディレクトリの中の constants.js と math.js でエクスポートしてるものを index.js にまと
+めて再エクスポートしてる」
+```
+
+```typeScript
+const n = 3
+
+const a = [...Array(n)].map((_, n)=> n)
+
+console.log(a)
+a.forEach( ( e ) => console.log( e) );
+```
+
+```javascript
+const a = [...Array(n)].map((_, n) => n);
+```
+
+- これいいなーーーー。関数チックでかっこいい。
+
+```javascript
+.sort()いみわからん。
+```
+
+```javascript
+「slice(n, m)
+138 は配列のインデックス n から m - 1 までの選択された範囲をシャローコピーして新しい
+配列を返すメソッドなんだけど、引数を完全に省略すると元の配列と全く同じものができる。だからこ
+れを非破壊メソッドの前に挟めば、元の配列が破壊されることはなくなる。
+```
+
+````javascript
+const list = [4, 8, 2, 6];
+const sortedList = list.slice().sort((n, m) => (n < m ? -1 : 1));
+console.log(sortedList, list); // [2, 4, 6, 8] [4, 8, 2, 6]
+const reverseList = [...list].reverse();
+console.log(reverseList, list); // [6, 2, 8, 4] [4, 8, 2, 6]```
+````
+
+```javascript
+> [...Array(3)]
+[ undefined, undefined, undefined ]
+> [...Array(3)].map((_, n) => { console.log(`${n + 1} times`); });
+1 times
+2 times
+3 times
+> [...Array(3).keys()]
+[ 0, 1, 2 ]
+> [...Array(3).keys()].map((n) => { console.log(`${n + 1} times`); });
+1 times
+2 times
+3 times
 
 ```
